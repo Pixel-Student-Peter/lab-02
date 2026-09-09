@@ -5,7 +5,6 @@
 - **CCID:** 1865258
 
 ## References and Resources
-Android Basics with Compose Course: https://developer.android.com/courses/android-basics-compose/course?hl=en
 
 
 ## Verbal Collaboration
