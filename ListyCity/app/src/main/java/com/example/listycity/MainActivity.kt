@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) {innerPadding ->
                     CityListScreen(
                         cities = cityRepository.cities,
-                        onAddCity = { cityRepository.addCity(it)},
+                        onAddCity = { if(!cityRepository.cities.contains(it)) {cityRepository.addCity(it)}},
                         onDeleteCity = {cityRepository.deleteCity(it)},
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -95,16 +97,15 @@ fun CityListScreen(cities: List<String>,
 @Composable
 fun CityRow(city: String,
             onDeleteCity: (String) -> Unit){
-    Row(modifier = Modifier.padding(16.dp)){
-        Text(text = city, fontSize = 28.sp,
-            modifier = Modifier.padding(horizontal = 18.dp, vertical = 14.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Button(
-            onClick = { onDeleteCity(city) }
-        ){
-            Text("X")
-        }
+
+    Text(text = city, fontSize = 28.sp,
+        modifier = Modifier.padding(horizontal = 18.dp, vertical = 14.dp),
+    )
+    Button(
+        onClick = { onDeleteCity(city) },
+        modifier = Modifier.padding(horizontal = 10.dp)
+    ){
+        Text("Delete $city")
     }
 
 }
