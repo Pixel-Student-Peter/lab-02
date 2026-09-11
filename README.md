@@ -5,7 +5,7 @@
 - **CCID:** 1865258
 
 ## References and Resources
-
+N/A
 
 ## Verbal Collaboration
 N/A
